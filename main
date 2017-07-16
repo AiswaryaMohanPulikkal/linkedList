@@ -1,0 +1,187 @@
+#include<iostream>
+using namespace std;
+
+class Node {
+    int data;
+    Node* next;
+
+  public:
+    Node() {};
+    void setData(int aData) { data = aData; };
+    void setNext(Node* aNext) { next = aNext; };
+    int getData() { return data; };
+    Node* getNext() { return next; };
+};
+class List{
+   Node * head;
+   public:
+	List() {head=NULL;};
+	void appendData(int data);
+       // void deleteData(int data);
+	void print();
+        void deleteDup();
+        void kth(int k);
+        void partition(int k);
+
+};
+
+//print list
+
+void List::print(){
+
+    Node* temp= head;
+
+     if(temp==NULL)
+	{cout<<"\nEmpty list"<<endl; return;}
+     else if(temp->getNext()==NULL)
+       { cout<<temp->getData();cout<<"->NULL"; }
+     else
+        {
+	  do{
+             cout<<temp->getData()<<"->";
+	     temp=temp->getNext();
+            }while(temp!=NULL);
+
+	    cout<<"NULL"<<endl;
+        }
+}//end of print
+
+
+//append list
+
+
+void List::appendData(int data){
+
+    
+     Node *newNode = new Node();
+     newNode->setData(data);
+     newNode->setNext(NULL);
+     
+      Node *temp= head;
+     if(temp==NULL)
+     {
+	head= newNode;
+    }
+     else
+     {
+       while(temp->getNext()!=NULL)
+	temp=temp->getNext();
+	
+       temp->setNext(newNode);
+       
+    }//end else
+
+}// end append
+
+/*void List::deleteDup(){
+  
+   Node *t=head;
+   Node *t1;
+   Node *t2;
+   Node *dup;
+   cout<<"r";
+   while(t!=NULL && t->getNext()!=NULL){
+    
+     t=t->getNext();
+    
+     t1=t->getNext();
+     t2=t;
+    
+      while(t1->getNext()!=NULL){
+          if(t1->getData()==t->getData())
+		{	dup=t1;
+			t2->setNext(t1->getNext());
+ 			delete dup;
+		 
+                }
+		else
+		   {t1=t1->getNext();
+    		   t2=t2->getNext();}
+
+
+       }//end inner while
+
+   
+   }//end outer while
+}//end delte duplicates*/
+
+
+
+//kthelement
+
+void List::kth(int k){
+
+Node * temp=head;
+
+while(k>0)
+{
+temp=temp->getNext();
+k--;
+}
+
+cout<<temp->getData();
+
+}
+
+
+// partition around k
+
+/*void List:: partition(int k){
+
+Node * t=head;
+Node * t2=head;
+Node * t3=head;
+Node *dup;
+while(t->getData()!=k)
+{
+t=t->getNext();
+}
+while(t2->getNext()!=NULL)
+t2=t2->getNext();
+
+
+while(t3!=NULL)
+{   dup=t3;
+     t3=t3->getNext();
+   if(t3->getData() >=k && t3!=t)
+   {
+	dup->setNext(t3->getNext());
+	t2->setNext(t3);
+	t3->setNext(NULL);
+
+   }
+}
+
+//list.print();
+
+
+
+}//end partition*/
+//main()
+
+int main()
+{
+List list;
+int k;
+list.appendData(100);
+list.print();
+list.appendData(200);
+list.print();
+list.appendData(400);
+list.print();
+list.appendData(100);
+list.print();
+list.appendData(700);
+list.appendData(500);
+list.appendData(800);
+list.print();
+//list.deleteDup();
+//list.print();
+//cout<<"enter k";
+//cin>>k;
+//list.partition(k);
+//list.print();
+}
+
+
+
